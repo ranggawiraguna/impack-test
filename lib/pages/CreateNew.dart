@@ -21,6 +21,10 @@ class _CreateNewState extends State<CreateNew> {
 
   @override
   Widget build(BuildContext context) {
-    return PageContainer(title: 'New Activity', child: Container());
+    return PageContainer(
+      title: 'New Activity',
+      withBackButton: true,
+      child: Container(),
+    );
   }
 }

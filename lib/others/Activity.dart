@@ -1,15 +1,8 @@
 // ignore_for_file: file_names
 
 class Activity {
-  static const String url =
-      "https://ranggawiraguna.github.io/test-impack-api/activities.json";
-
   int id;
-  String activityType;
-  String institution;
-  String when;
-  String objective;
-  String remarks;
+  String activityType, institution, when, objective, remarks, result;
 
   Activity({
     required this.id,
@@ -18,6 +11,7 @@ class Activity {
     required this.when,
     required this.objective,
     required this.remarks,
+    required this.result,
   });
 
   Map<String, dynamic> toJson() => {
@@ -27,6 +21,7 @@ class Activity {
         "when": when,
         "objective": objective,
         "remarks": remarks,
+        "result": result,
       };
 
   factory Activity.fromJson(Map<String, dynamic> json) => Activity(
@@ -36,6 +31,7 @@ class Activity {
         when: json['when'],
         objective: json['objective'],
         remarks: json['remarks'],
+        result: json['result'],
       );
 }
 
@@ -48,5 +44,6 @@ class UninitializeActivity extends Activity {
           when: '',
           objective: '',
           remarks: '',
+          result: '',
         );
 }

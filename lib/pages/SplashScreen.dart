@@ -2,33 +2,20 @@
 
 import 'package:flutter/material.dart';
 import 'package:test_impack/others/AppTheme.dart';
-import 'package:test_impack/widgets/FlexSpace.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  late final AppTheme theme;
-
-  @override
-  void initState() {
-    theme = AppTheme(context);
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final AppTheme theme = AppTheme(context);
     return Scaffold(
       backgroundColor: theme.colorPrimary,
       body: Center(
           child: Row(
-        children: [
-          FlexSpace(150),
-          const Flexible(
+        children: const <Widget>[
+          Spacer(flex: 150),
+          Flexible(
             flex: 730,
             child: FlutterLogo(
               size: double.infinity,
@@ -36,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
               textColor: Colors.white,
             ),
           ),
-          FlexSpace(200),
+          Spacer(flex: 200),
         ],
       )),
     );

@@ -1,10 +1,13 @@
 // ignore_for_file: file_names
 import 'package:flutter/material.dart';
+import 'package:test_impack/others/Activity.dart';
 import 'package:test_impack/others/AppTheme.dart';
 import 'package:test_impack/widgets/PageContainer.dart';
 
 class EditInfo extends StatefulWidget {
-  const EditInfo({Key? key}) : super(key: key);
+  final Activity activity;
+
+  const EditInfo({Key? key, required this.activity}) : super(key: key);
 
   @override
   State<EditInfo> createState() => _EditInfoState();
@@ -21,6 +24,10 @@ class _EditInfoState extends State<EditInfo> {
 
   @override
   Widget build(BuildContext context) {
-    return PageContainer(title: 'Edit Activity', child: Container());
+    return PageContainer(
+      title: 'Edit Activity',
+      withBackButton: true,
+      child: Container(),
+    );
   }
 }

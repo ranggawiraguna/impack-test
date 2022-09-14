@@ -6,7 +6,7 @@ class AppTheme {
 
   AppTheme(this.context);
 
-  Color get colorPrimary => const Color(0xFF001689);
+  Color get colorPrimary => const Color(0xFF1E2D70);
   Color get colorSecondary => const Color(0xFF20C3AF);
   Color get colorCardItem => const Color(0xFF747EAF);
 

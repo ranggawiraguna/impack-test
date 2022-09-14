@@ -1,10 +1,13 @@
 // ignore_for_file: file_names
 import 'package:flutter/material.dart';
+import 'package:test_impack/others/Activity.dart';
 import 'package:test_impack/others/AppTheme.dart';
 import 'package:test_impack/widgets/PageContainer.dart';
 
 class DetailInfo extends StatefulWidget {
-  const DetailInfo({Key? key}) : super(key: key);
+  final Activity activity;
+
+  const DetailInfo({Key? key, required this.activity}) : super(key: key);
 
   @override
   State<DetailInfo> createState() => _DetailInfoState();
@@ -21,6 +24,10 @@ class _DetailInfoState extends State<DetailInfo> {
 
   @override
   Widget build(BuildContext context) {
-    return PageContainer(title: 'Activity Info', child: Container());
+    return PageContainer(
+      title: 'Activity Info',
+      withBackButton: true,
+      child: Container(),
+    );
   }
 }
