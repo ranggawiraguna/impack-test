@@ -1,4 +1,3 @@
-// ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:test_impack/others/Activity.dart';
@@ -6,7 +5,7 @@ import 'package:test_impack/others/AppTheme.dart';
 import 'package:test_impack/pages/DetailInfo.dart';
 import 'package:test_impack/pages/EditInfo.dart';
 
-class ActivityCardItem extends StatelessWidget {
+class CardItemActivity extends StatelessWidget {
   static final Map<String, IconData> _icons = {
     'meeting': Icons.groups_rounded,
     'phone_call': Icons.phone_in_talk_rounded,
@@ -17,9 +16,9 @@ class ActivityCardItem extends StatelessWidget {
   };
 
   final Activity activity;
-  final ActivityCardItemStatus status;
+  final CardItemActivityStatus status;
 
-  const ActivityCardItem({
+  const CardItemActivity({
     super.key,
     required this.activity,
     required this.status,
@@ -37,16 +36,16 @@ class ActivityCardItem extends StatelessWidget {
         width: double.infinity,
         child: Stack(
           children: [
-            status != ActivityCardItemStatus.none
+            status != CardItemActivityStatus.none
                 ? Positioned(
                     left: theme.size(21),
-                    top: status == ActivityCardItemStatus.first
+                    top: status == CardItemActivityStatus.first
                         ? theme.size(40)
                         : 0,
-                    bottom: status == ActivityCardItemStatus.last ? null : 0,
+                    bottom: status == CardItemActivityStatus.last ? null : 0,
                     child: Container(
                       width: theme.size(10),
-                      height: status == ActivityCardItemStatus.last
+                      height: status == CardItemActivityStatus.last
                           ? theme.size(50)
                           : null,
                       color: Colors.deepPurpleAccent,
@@ -279,4 +278,4 @@ class ActivityCardItem extends StatelessWidget {
   }
 }
 
-enum ActivityCardItemStatus { none, normal, first, last }
+enum CardItemActivityStatus { none, normal, first, last }

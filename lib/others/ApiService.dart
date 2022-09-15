@@ -1,4 +1,3 @@
-// ignore_for_file: file_names
 import 'package:test_impack/others/Activity.dart';
 
 class ApiService {
@@ -6,8 +5,7 @@ class ApiService {
 
   factory ApiService() => _instance;
   static final ApiService _instance = ApiService._internal();
-  static const String _urlActivities =
-      "https://ranggawiraguna.github.io/test-impack-api/activities.json";
+  static const String _root = "https://xdummydatax-default-rtdb.firebaseio.com";
 
   Future<List<Activity>> getAllActivity() async => [];
 
@@ -17,7 +15,7 @@ class ApiService {
     //
   }
 
-  Future<void> postActivity(Activity newActivity) async {
+  Future<void> postActivity(Map<String, dynamic> newActivity) async {
     //
   }
 

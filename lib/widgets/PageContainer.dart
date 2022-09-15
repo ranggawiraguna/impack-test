@@ -1,4 +1,3 @@
-// ignore_for_file: non_constant_identifier_names, file_names
 import 'package:flutter/material.dart';
 import 'package:test_impack/others/AppTheme.dart';
 
@@ -61,26 +60,24 @@ class PageContainer extends StatelessWidget {
                               ),
                             )
                           : const SizedBox.shrink(),
-                      Flexible(
-                        child: SizedBox(
-                          child: Center(
-                            child: Padding(
-                              padding: EdgeInsets.only(bottom: theme.size(20)),
-                              child: AnimatedSwitcher(
-                                duration: const Duration(milliseconds: 300),
-                                transitionBuilder: (Widget child,
-                                        Animation<double> animation) =>
-                                    FadeTransition(
-                                        opacity: animation, child: child),
-                                child: Text(
-                                  title,
-                                  key: ValueKey<String>(title),
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'Folks',
-                                    fontSize: theme.size(48),
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                      Expanded(
+                        child: Center(
+                          child: Padding(
+                            padding: EdgeInsets.only(bottom: theme.size(20)),
+                            child: AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 300),
+                              transitionBuilder:
+                                  (Widget child, Animation<double> animation) =>
+                                      FadeTransition(
+                                          opacity: animation, child: child),
+                              child: Text(
+                                title,
+                                key: ValueKey<String>(title),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Folks',
+                                  fontSize: theme.size(48),
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
@@ -88,10 +85,7 @@ class PageContainer extends StatelessWidget {
                         ),
                       ),
                       withBackButton
-                          ? SizedBox(
-                              width: theme.size(130),
-                              child: const Spacer(),
-                            )
+                          ? SizedBox(width: theme.size(130))
                           : const SizedBox.shrink(),
                     ],
                   ),

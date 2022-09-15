@@ -1,9 +1,8 @@
-// ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:test_impack/others/Activity.dart';
 import 'package:test_impack/others/AppTheme.dart';
-import 'package:test_impack/widgets/ActivityCardItem.dart';
+import 'package:test_impack/widgets/CardItemActivity.dart';
 
 class ActivityList extends StatefulWidget {
   final List<Activity> activities;
@@ -54,15 +53,15 @@ class _ActivityListState extends State<ActivityList> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: widget.activities.length,
-                  itemBuilder: (context, index) => ActivityCardItem(
+                  itemBuilder: (context, index) => CardItemActivity(
                     activity: widget.activities[index],
                     status: widget.activities.length == 1
-                        ? ActivityCardItemStatus.none
+                        ? CardItemActivityStatus.none
                         : index == 0
-                            ? ActivityCardItemStatus.first
+                            ? CardItemActivityStatus.first
                             : index == widget.activities.length - 1
-                                ? ActivityCardItemStatus.last
-                                : ActivityCardItemStatus.normal,
+                                ? CardItemActivityStatus.last
+                                : CardItemActivityStatus.normal,
                   ),
                 ),
               ],
