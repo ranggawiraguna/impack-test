@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:test_impack/others/Activity.dart';
-import 'package:test_impack/others/AppTheme.dart';
+import 'package:provider/provider.dart';
+import 'package:test_impack/models/Activity.dart';
+import 'package:test_impack/providers/Activities.dart';
+import 'package:test_impack/services/AppTheme.dart';
 import 'package:test_impack/pages/DetailInfo.dart';
 import 'package:test_impack/pages/EditInfo.dart';
 
@@ -15,18 +17,21 @@ class CardItemActivity extends StatelessWidget {
     'phone_call': "Phone Call",
   };
 
-  final Activity activity;
+  final String id;
   final CardItemActivityStatus status;
 
   const CardItemActivity({
     super.key,
-    required this.activity,
+    required this.id,
     required this.status,
   });
 
   @override
   Widget build(BuildContext context) {
+    Activity activity = Provider.of<Activities>(context).selectById(id);
+
     final AppTheme theme = AppTheme(context);
+    final Activities activities = Provider.of<Activities>(context);
 
     return Padding(
       padding: EdgeInsets.only(
@@ -84,9 +89,7 @@ class CardItemActivity extends StatelessWidget {
                         child: SizedBox(
                           width: theme.size(120),
                           child: Text(
-                            DateFormat('Hm').format(
-                              DateTime.parse((activity.when)),
-                            ),
+                            DateFormat('Hm').format(activity.when),
                             style: TextStyle(
                               fontSize: theme.size(36),
                             ),
@@ -108,7 +111,7 @@ class CardItemActivity extends StatelessWidget {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => DetailInfo(
-                              activity: activity,
+                              id: activity.id,
                             ),
                           ),
                         );
@@ -176,7 +179,7 @@ class CardItemActivity extends StatelessWidget {
                                         Navigator.of(context).push(
                                           MaterialPageRoute(
                                             builder: (context) => DetailInfo(
-                                              activity: activity,
+                                              id: id,
                                             ),
                                           ),
                                         );
@@ -186,18 +189,32 @@ class CardItemActivity extends StatelessWidget {
                                         Navigator.of(context).push(
                                           MaterialPageRoute(
                                             builder: (context) => EditInfo(
-                                              activity: activity,
+                                              id: id,
                                             ),
                                           ),
                                         );
                                         break;
 
                                       case 3:
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                            content: Text('Delete this data'),
-                                          ),
+                                        activities.deleteActivity(
+                                          activity.id,
+                                          (bool success) {
+                                            if (success) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                const SnackBar(
+                                                    content: Text(
+                                                        "Successfully delete data")),
+                                              );
+                                            } else {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                const SnackBar(
+                                                    content: Text(
+                                                        "Failed to delete data")),
+                                              );
+                                            }
+                                          },
                                         );
                                         break;
 
@@ -216,7 +233,7 @@ class CardItemActivity extends StatelessWidget {
                                       child: Text(
                                         "Detail",
                                         style: TextStyle(
-                                          fontSize: theme.size(32),
+                                          fontSize: theme.size(36),
                                         ),
                                       ),
                                     ),
@@ -230,7 +247,7 @@ class CardItemActivity extends StatelessWidget {
                                       child: Text(
                                         "Edit",
                                         style: TextStyle(
-                                          fontSize: theme.size(32),
+                                          fontSize: theme.size(36),
                                         ),
                                       ),
                                     ),
@@ -244,7 +261,7 @@ class CardItemActivity extends StatelessWidget {
                                       child: Text(
                                         "Delete",
                                         style: TextStyle(
-                                          fontSize: theme.size(32),
+                                          fontSize: theme.size(36),
                                         ),
                                       ),
                                     )

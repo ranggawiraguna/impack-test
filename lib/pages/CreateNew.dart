@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:test_impack/others/Activity.dart';
-import 'package:test_impack/others/ApiService.dart';
-import 'package:test_impack/others/AppTheme.dart';
+import 'package:provider/provider.dart';
+import 'package:test_impack/models/Activity.dart';
+import 'package:test_impack/providers/Activities.dart';
+import 'package:test_impack/services/ApiService.dart';
+import 'package:test_impack/services/AppTheme.dart';
 import 'package:test_impack/widgets/ButtonSubmitForm.dart';
 import 'package:test_impack/widgets/FormGroup.dart';
 import 'package:test_impack/widgets/PageContainer.dart';
@@ -60,18 +62,32 @@ class _CreateNewState extends State<CreateNew> {
     super.initState();
   }
 
-  void submitFormToNewActivity() {
+  void submitFormToNewActivity(Activities activities) {
     if (forms
         .map((form) => form.controller)
         .every((controller) => controller.text.isNotEmpty)) {
-      apiService.postActivity(
+      activities.addActivity(
         Activity.createNew(
           activityType: forms[0].controller.text,
           institution: forms[1].controller.text,
-          when: forms[2].controller.text,
+          when: DateTime.parse(forms[2].controller.text),
           objective: forms[3].controller.text,
           remarks: forms[4].controller.text,
-        ).toJson(),
+        ),
+        (bool success) {
+          if (success) {
+            for (FormItem form in forms) {
+              form.controller.clear();
+            }
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text("Successfully add new activity")),
+            );
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text("Failed to add new activity")),
+            );
+          }
+        },
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -84,6 +100,8 @@ class _CreateNewState extends State<CreateNew> {
 
   @override
   Widget build(BuildContext context) {
+    final Activities activities = Provider.of<Activities>(context);
+
     return PageContainer(
       title: 'New Activity',
       withBackButton: true,
@@ -111,7 +129,7 @@ class _CreateNewState extends State<CreateNew> {
               SizedBox(height: theme.size(50)),
               ButtonSubmitForm(
                 text: 'Submit Activity',
-                onClick: () => submitFormToNewActivity(),
+                onClick: () => submitFormToNewActivity(activities),
               ),
             ],
           ),

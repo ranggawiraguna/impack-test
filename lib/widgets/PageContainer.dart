@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test_impack/others/AppTheme.dart';
+import 'package:test_impack/services/AppTheme.dart';
 
 class PageContainer extends StatelessWidget {
   final Widget child;
@@ -63,7 +63,10 @@ class PageContainer extends StatelessWidget {
                       Expanded(
                         child: Center(
                           child: Padding(
-                            padding: EdgeInsets.only(bottom: theme.size(20)),
+                            padding: EdgeInsets.only(
+                              top: theme.size(tabBarOption != null ? 40 : 0),
+                              bottom: theme.size(20),
+                            ),
                             child: AnimatedSwitcher(
                               duration: const Duration(milliseconds: 300),
                               transitionBuilder:

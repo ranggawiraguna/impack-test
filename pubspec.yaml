@@ -1,6 +1,7 @@
 name: test_impack
 
-description: Test coding for job applications in the position of Mobile Engineer at PT. Impack Pratama Group
+description: Test coding for job applications in the position of Mobile Engineer
+  at PT. Impack Pratama Group
 
 version: 1.0.0+1
 
@@ -13,6 +14,7 @@ dependencies:
     sdk: flutter
   http: ^0.13.5
   intl: ^0.17.0
+  provider: ^6.0.3
 
 dev_dependencies:
   flutter_lints: ^2.0.0
