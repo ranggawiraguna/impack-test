@@ -57,9 +57,10 @@ class _MainPageState extends State<MainPage> {
       (date) {
         List<Activity> activityGroup = activities
             .where((activity) =>
-                activity.when.isAfter(date) &&
+                (activity.when.isAfter(date) ||
+                    activity.when.isAtSameMomentAs(date)) &&
                 activity.when.isBefore(
-                  DateTime(date.year, date.month, date.day + 1),
+                  DateTime(date.year, date.month, date.day + 1, 23, 59),
                 ))
             .toList();
 
