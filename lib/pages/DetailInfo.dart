@@ -63,8 +63,8 @@ class _DetailInfoState extends State<DetailInfo> {
 
   @override
   Widget build(BuildContext context) {
-    Activities activities = Provider.of<Activities>(context);
-    Activity activity = activities.selectById(widget.id);
+    final Activities activities = Provider.of<Activities>(context);
+    final Activity activity = activities.selectById(widget.id);
 
     if (activity.result.isNotEmpty && !_alreadySetInitValues) {
       resultController.text = activity.result;

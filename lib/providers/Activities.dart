@@ -26,10 +26,12 @@ class Activities with ChangeNotifier {
     Activity newActivity,
     Function(bool status) showAlert,
   ) async {
-    await apiService.postActivity(newActivity.toJson()).then((status) {
-      _data.add(newActivity);
-      notifyListeners();
-      showAlert(status);
+    await apiService.postActivity(newActivity.toJson()).then((newId) {
+      if (newId.isNotEmpty) {
+        _data.add(Activity.fromJson({'id': newId, ...newActivity.toJson()}));
+        notifyListeners();
+      }
+      showAlert(newId.isNotEmpty ? true : false);
     });
   }
 

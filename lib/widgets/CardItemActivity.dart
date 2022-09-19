@@ -28,10 +28,9 @@ class CardItemActivity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Activity activity = Provider.of<Activities>(context).selectById(id);
-
     final AppTheme theme = AppTheme(context);
     final Activities activities = Provider.of<Activities>(context);
+    final Activity activity = activities.selectById(id);
 
     return Padding(
       padding: EdgeInsets.only(
@@ -186,13 +185,15 @@ class CardItemActivity extends StatelessWidget {
                                         break;
 
                                       case 2:
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (context) => EditInfo(
-                                              id: id,
+                                        if (activity.result.isEmpty) {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) => EditInfo(
+                                                id: id,
+                                              ),
                                             ),
-                                          ),
-                                        );
+                                          );
+                                        }
                                         break;
 
                                       case 3:
@@ -239,6 +240,7 @@ class CardItemActivity extends StatelessWidget {
                                     ),
                                     PopupMenuItem(
                                       value: 2,
+                                      enabled: activity.result.isEmpty,
                                       height: double.minPositive,
                                       padding: EdgeInsets.symmetric(
                                         vertical: theme.size(20),

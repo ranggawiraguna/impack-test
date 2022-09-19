@@ -61,16 +61,17 @@ class ApiService {
     }
   }
 
-  Future<bool> postActivity(Map<String, dynamic> newData) async {
+  Future<String> postActivity(Map<String, dynamic> newData) async {
     try {
-      return (await http.post(_url("$_root/activities"),
-                      body: json.encode(newData)))
-                  .statusCode ==
-              200
-          ? true
-          : false;
+      final response = await http.post(_url("$_root/activities"),
+          body: json.encode(newData));
+      String newId =
+          (json.decode(response.body) as Map<String, dynamic>)['name']
+              .toString();
+
+      return response.statusCode == 200 && newId.isNotEmpty ? newId : '';
     } catch (_) {
-      return false;
+      return '';
     }
   }
 
