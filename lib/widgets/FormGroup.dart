@@ -139,7 +139,15 @@ class FormGroup extends StatelessWidget {
                                               null
                                           ? DateTime.parse(form.controller.text)
                                           : DateTime.now(),
-                                  firstDate: DateTime.now(),
+                                  firstDate: DateTime.tryParse(
+                                              form.controller.text) !=
+                                          null
+                                      ? DateTime.parse(form.controller.text)
+                                                  .compareTo(DateTime.now()) <=
+                                              0
+                                          ? DateTime.parse(form.controller.text)
+                                          : DateTime.now()
+                                      : DateTime.now(),
                                   lastDate: DateTime(
                                     DateTime.now().year + 10,
                                     12,
