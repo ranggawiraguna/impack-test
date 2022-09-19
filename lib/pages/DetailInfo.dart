@@ -160,15 +160,17 @@ class _DetailInfoState extends State<DetailInfo> {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => EditInfo(
-                                  id: widget.id,
-                                ),
-                              ),
-                            );
-                          },
+                          onPressed: activity.result.isEmpty
+                              ? () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => EditInfo(
+                                        id: widget.id,
+                                      ),
+                                    ),
+                                  );
+                                }
+                              : null,
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
                             padding: EdgeInsets.all(theme.size(30)),
