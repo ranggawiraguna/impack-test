@@ -64,7 +64,11 @@ class PageContainer extends StatelessWidget {
                         child: Center(
                           child: Padding(
                             padding: EdgeInsets.only(
-                              top: theme.size(tabBarOption != null ? 40 : 0),
+                              top: theme.size(
+                                tabBarOption != null && title != "Profile"
+                                    ? 40
+                                    : 0,
+                              ),
                               bottom: theme.size(20),
                             ),
                             child: AnimatedSwitcher(
